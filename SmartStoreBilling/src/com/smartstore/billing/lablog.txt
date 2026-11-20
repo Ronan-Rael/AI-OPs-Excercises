@@ -1,0 +1,1046 @@
+EX1:
+No Prompt
+
+EX2:
+Prompt:
+You are an experienced Java developer.
+
+Develop a simple Java billing application for a retail store named SmartStore.
+The class must be named BillingApplication in package com.smartstore.billing.
+
+Requirements:
+1. Accept customer name, product name, product price and quantity.
+2. Calculate the total purchase amount (price x quantity).
+3. Apply a 5% discount if the purchase amount is between Rs. 1,000 and Rs. 4,999.
+4. Apply a 10% discount if the purchase amount is Rs. 5,000 or above.
+5. No discount below Rs. 1,000.
+6. Display customer details, total amount, discount percentage, discount amount
+   and final amount, with amounts shown to 2 decimal places.
+
+Constraints:
+- Use Java fundamentals only: variables, data types, if-else and arithmetic operators.
+- Use Scanner for user input.
+- Do not use advanced Java features.
+- Write readable, beginner-friendly code.
+- Include comments explaining important logic.
+
+Generate a complete executable Java program with a main() method.
+
+Result:
+		Scanner scanner = new Scanner(System.in);
+
+        // Accept customer and product details
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter product name: ");
+        String productName = scanner.nextLine();
+
+        System.out.print("Enter product price: ");
+        double productPrice = scanner.nextDouble();
+
+        System.out.print("Enter quantity: ");
+        int quantity = scanner.nextInt();
+
+        // Calculate the total purchase amount
+        double totalAmount = productPrice * quantity;
+
+        // Determine the applicable discount percentage
+        double discountPercentage = 0.0;
+
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            discountPercentage = 5.0;
+        } else if (totalAmount >= 5000.0) {
+            discountPercentage = 10.0;
+        }
+
+        // Calculate the discount and final amount
+        double discountAmount = totalAmount * discountPercentage / 100.0;
+        double finalAmount = totalAmount - discountAmount;
+
+        // Display billing details
+        System.out.println("\n--- SmartStore Bill ---");
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Product Name: " + productName);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+        System.out.printf("Discount Percentage: %.0f%%%n", discountPercentage);
+        System.out.printf("Discount Amount: Rs. %.2f%n", discountAmount);
+        System.out.printf("Final Amount: Rs. %.2f%n", finalAmount);
+
+        scanner.close();
+
+EX3:
+Prompt:
+Act as a Java programming instructor.
+
+Explain the selected Java code line by line.
+
+For each important statement:
+1. Explain what it does.
+2. Explain why it is required.
+3. Identify the Java concept being used.
+4. Give a simple example where applicable.
+
+Pay special attention to:
+- Scanner and user input
+- Variables and data types
+- Arithmetic calculations
+- If-else conditions
+- Discount calculation
+- Output statements
+
+Explain everything in beginner-friendly language.
+
+Result:
+A detailed explanation, line-by-line, of what the generated code does.
+A simple summary of the program flow is:
+
+	1. Read customer and product information.
+	2. Calculate the original total.
+	3. Check the total against the discount conditions.
+	4. Calculate and subtract the discount.
+	5. Print the complete formatted bill.
+
+
+EX4:
+Before:
+--- SmartStore Bill ---
+Customer Name: Rahul
+Product Name: Laptop Bag
+Total Amount: Rs. 6000.00
+Discount Percentage: 10%
+Discount Amount: Rs. 600.00
+Final Amount: Rs. 5400.00
+
+After: 
+--- SmartStore Bill ---
+Customer Name: Rahul
+Product Name: Laptop Bag
+Total Amount: Rs. 6000.00
+Discount Percentage: 10%
+Discount Amount: Rs. 600.00
+Final Amount: Rs. 5400.00
+
+Input:
+Review the existing SmartStore billing application.
+
+Refactor the code using these requirements:
+1. Move discount calculation into a separate method:
+   public static double calculateDiscount(double totalAmount)
+   It must return the discount amount in rupees (not the percentage).
+2. Move bill printing into a separate method named printBill().
+3. Use meaningful variable and method names.
+4. Remove unnecessary code.
+5. Improve readability and maintainability.
+6. Do not change the existing business rules or the output format.
+7. Do not introduce advanced Java concepts.
+
+Explain the changes you made and why they improve the code.
+
+Output:
+package com.smartstore.billing;
+
+import java.util.Scanner;
+
+public class BillingApplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter product name: ");
+        String productName = scanner.nextLine();
+
+        System.out.print("Enter product price: ");
+        double productPrice = scanner.nextDouble();
+
+        System.out.print("Enter quantity: ");
+        int quantity = scanner.nextInt();
+
+        double totalAmount = productPrice * quantity;
+        double discountAmount = calculateDiscount(totalAmount);
+        double finalAmount = totalAmount - discountAmount;
+
+        printBill(customerName, productName, totalAmount,
+                discountAmount, finalAmount);
+
+        scanner.close();
+    }
+
+    public static double calculateDiscount(double totalAmount) {
+        double discountPercentage = 0.0;
+
+        // Apply 5% discount between Rs. 1000 and Rs. 4999
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            discountPercentage = 5.0;
+        }
+        // Apply 10% discount for Rs. 5000 and above
+        else if (totalAmount >= 5000.0) {
+            discountPercentage = 10.0;
+        }
+
+        // Convert the percentage into the discount amount in rupees
+        return totalAmount * discountPercentage / 100.0;
+    }
+
+    public static void printBill(String customerName, String productName,
+                                 double totalAmount, double discountAmount,
+                                 double finalAmount) {
+        double discountPercentage = 0.0;
+
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            discountPercentage = 5.0;
+        } else if (totalAmount >= 5000.0) {
+            discountPercentage = 10.0;
+        }
+
+        System.out.println("\n--- SmartStore Bill ---");
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Product Name: " + productName);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+        System.out.printf("Discount Percentage: %.0f%%%n", discountPercentage);
+        System.out.printf("Discount Amount: Rs. %.2f%n", discountAmount);
+        System.out.printf("Final Amount: Rs. %.2f%n", finalAmount);
+    }
+}
+
+
+
+EX5: 
+Input:
+2. Purchase amount exactly Rs. 1,000.
+3. Purchase amount Rs. 4,999.
+4. Purchase amount exactly Rs. 5,000.
+5. Purchase amount above Rs. 5,000.
+6. Quantity greater than one.
+
+For each test case provide:
+- Test input (price and quantity)
+- Expected discount percentage
+- Expected discount amount
+- Expected final amount
+
+Identify any additional edge cases that should be tested.
+
+Output:
+Test Cases
+
+| Test Case | Price | Quantity | Total | Discount Percentage | Discount Amount | Final Amount | |---|---:|---:|---:|---:|---:|---:| | Below Rs. 1,000 | Rs. 400.00 | 2 | Rs. 800.00 | 0% | Rs. 0.00 | Rs. 800.00 | | Exactly Rs. 1,000 | Rs. 500.00 | 2 | Rs. 1,000.00 | 5% | Rs. 50.00 | Rs. 950.00 | | Rs. 4,999 | Rs. 499.90 | 10 | Rs. 4,999.00 | 5% | Rs. 249.95 | Rs. 4,749.05 | | Exactly Rs. 5,000 | Rs. 1,250.00 | 4 | Rs. 5,000.00 | 10% | Rs. 500.00 | Rs. 4,500.00 | | Above Rs. 5,000 | Rs. 1,500.00 | 4 | Rs. 6,000.00 | 10% | Rs. 600.00 | Rs. 5,400.00 | | Quantity greater than one | Rs. 250.00 | 5 | Rs. 1,250.00 | 5% | Rs. 62.50 | Rs. 1,187.50 |
+
+Boundary Verification
+
+	•  Rs. 999.99: 0% discount, so no discount is deducted.
+	•  Rs. 1,000.00: 5% discount begins.
+	•  Rs. 4,999.00: 5% discount still applies.
+	•  Rs. 5,000.00: 10% discount begins.
+
+Note that Java floating-point calculations can introduce very small precision differences. The application uses printf("%.2f"), so expected currency values are displayed correctly to two decimal places.
+
+Additional Edge Cases
+
+	1. Free or zero-price product
+	2. Price: Rs. 0.00
+	3. Quantity: 3
+	4. Expected total, discount, and final amount: Rs. 0.00
+	5. Quantity of one
+	6. Price: Rs. 1,200.00
+	7. Quantity: 1
+	8. Total: Rs. 1,200.00
+	9. 5% discount: Rs. 60.00
+	10. Final amount: Rs. 1,140.00
+	11. Just below Rs. 1,000
+	12. Price: Rs. 999.99
+	13. Quantity: 1
+	14. Expected: 0% discount and Rs. 999.99 final amount
+	15. Just below Rs. 5,000
+	16. Price: Rs. 4,999.99
+	17. Quantity: 1
+	18. Expected: 5% discount, Rs. 249.9995 discount, and Rs. 4,749.9905 final amount
+	19. Displayed to two decimal places: Rs. 250.00 discount and Rs. 4,749.99 final amount
+	20. Negative price or quantity
+	21. The requirements do not specify validation.
+	22. The application would currently accept these values, potentially calculating an incorrect or negative total.
+	23. Add validation if negative inputs must be rejected.
+	24. Non-numeric input
+	25. Entering text for price or quantity can cause InputMismatchException.
+	26. Input validation should be added if invalid input handling is required.
+	27. Large purchase amount
+	28. Verify the calculation and two-decimal formatting for totals above Rs. 5,000.
+	29. Decimal quantity
+	30. The quantity variable is an int, so decimal quantities cannot be entered.
+	31. This is appropriate if only whole units are sold.
+	
+	AI got nothing wrong here
+	
+	
+EX6: 
+Input:
+It returns the discount amount in rupees.
+Generate beginner-friendly JUnit 5 test methods for it.
+
+Test the following:
+- Amount below Rs. 1,000 (800)
+- Amount exactly Rs. 1,000
+- Amount Rs. 4,999
+- Amount exactly Rs. 5,000
+- Amount above Rs. 5,000 (7,000)
+
+Use assertEquals(expected, actual, 0.001) for double values.
+Explain each test case and how the assertion verifies the expected result.
+Do not modify the business requirements.
+
+Output:
+package com.smartstore.billing;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class BillingApplicationTest {
+
+    @Test
+    void testDiscountBelow1000() {
+        double actualDiscount =
+                BillingApplication.calculateDiscount(800.0);
+
+        assertEquals(0.0, actualDiscount, 0.001);
+    }
+
+    @Test
+    void testDiscountExactly1000() {
+        double actualDiscount =
+                BillingApplication.calculateDiscount(1000.0);
+
+        assertEquals(50.0, actualDiscount, 0.001);
+    }
+
+    @Test
+    void testDiscountAt4999() {
+        double actualDiscount =
+                BillingApplication.calculateDiscount(4999.0);
+
+        assertEquals(249.95, actualDiscount, 0.001);
+    }
+
+    @Test
+    void testDiscountExactly5000() {
+        double actualDiscount =
+                BillingApplication.calculateDiscount(5000.0);
+
+        assertEquals(500.0, actualDiscount, 0.001);
+    }
+
+    @Test
+    void testDiscountAbove5000() {
+        double actualDiscount =
+                BillingApplication.calculateDiscount(7000.0);
+
+        assertEquals(700.0, actualDiscount, 0.001);
+    }
+}
+
+800: Pass
+1000: Pass
+4999: Pass
+5000: Pass
+7000: Pass
+
+EX7:
+Input:
+Review the SmartStore billing application.
+
+Identify:
+1. Possible logical errors.
+2. Incorrect discount calculations.
+3. Potential invalid user inputs.
+4. Possible security or reliability issues.
+5. Improvements required before deploying this application.
+
+Explain which suggestions are critical and which are optional.
+
+Output:
+1. Possible Logical Errors
+
+	•  Quantity is stored as a decimal `double`:
+	•  The application originally required quantity as a count of items, typically an integer.
+	•  0.5 quantity is currently accepted and can produce a purchase, although it may be inappropriate.
+	•  Zero is considered valid:
+	•  Price 0 and quantity 0 are accepted.
+	•  This may create a free or empty purchase instead of treating invalid input.
+	•  Blank customer or product names are accepted:
+	•  Only the price and quantity are validated.
+	•  A bill could be produced with missing details.
+	•  No overflow protection:
+	•  Extremely large price or quantity values can produce Infinity.
+	•  Double.parseDouble("1e309") may produce Infinity, which is not a reliable purchase amount.
+	•  Discount conditions are logically correct:
+	•  Below Rs. 1,000: 0%
+	•  Rs. 1,000–below Rs. 5,000: 5%
+	•  Rs. 5,000 and above: 10%
+	•  Duplicate percentage logic remains:
+	•  calculateDiscount() and printBill() contain separate discount conditions.
+	•  A future rule change could update only one method and produce inconsistent output.
+
+2. Incorrect Discount Calculations
+
+The discount formula is currently correct:
+discountAmount = totalAmount * discountPercentage / 100.0
+Examples:
+
+| Amount | Percentage | Discount | |---|---:|---:| | Rs. 800 | 0% | Rs. 0.00 | | Rs. 1,000 | 5% | Rs. 50.00 | | Rs. 4,999 | 5% | Rs. 249.95 | | Rs. 5,000 | 10% | Rs. 500.00 | | Rs. 7,000 | 10% | Rs. 700.00 |
+
+No incorrect discount calculation is visible for normal numeric values.
+
+However, double can cause tiny rounding differences. This is less suitable than a currency type for financial use.
+
+3. Potential Invalid User Inputs
+
+	•  NaN and Infinity may enter through Double.parseDouble().
+	•  isNumeric("NaN") and isNumeric("Infinity") currently return true.
+	•  They pass a < 0 check because neither is less than zero.
+	•  This can lead to unreliable output such as NaN or Infinity.
+	•  Negative values are rejected as required.
+	•  Decimal quantity is accepted even though quantity may be a whole-number count.
+	•  0 price or quantity is allowed.
+	•  Extremely small or large numeric values may lead to rounding or overflow.
+	•  Customer and product names are not checked for blank or whitespace-only input.
+	•  Numeric input with surrounding spaces can be parsed successfully by parseDouble().
+	•  The quantity and price prompts allow no upper limit.
+
+4. Security and Reliability Issues
+
+	•  NaN and infinity handling: A reliability problem and a critical input-validation gap.
+	•  Currency precision: double is unsuitable for exact financial calculations in a production system.
+	•  Input parsing exceptions: isNumeric() catches all exceptions, and parseDouble() is called again after validation. This is still safe for the current loop, but it can be simplified to avoid duplicate parsing.
+	•  No transaction storage or audit trail: Bills exist only in console output.
+	•  No rollback or confirmation: The console application cannot recover or review a failed transaction.
+	•  No business-level authentication: A local console application may not require it, but a deployed store system may need authorized users.
+	•  Security exposure is low: The application does not currently access a database, network, or stored data.
+	•  No overflow or rounding policy: This can create incorrect final values for very large or very precise purchases.
+
+5. Improvements Before Deployment
+
+Critical Improvements
+
+	1. Reject `NaN` and `Infinity`.
+	2. Add a finite-number check:
+double value = Double.parseDouble(input);
+if (Double.isNaN(value) || Double.isInfinite(value)) {
+    // Reject the input
+}
+	1. Require positive price and quantity.
+	2. If zero purchases are not allowed, validate values using > 0.
+	3. A free item or zero quantity should not generate a transaction.
+	4. Keep quantity as an integer.
+	5. Use int quantity and validate that it is at least 1.
+	6. If fractional quantities are genuinely required, explicitly use decimal quantity and document that rule.
+	7. Validate customer and product names.
+	8. Reject blank or whitespace-only names.
+	9. Use exact currency handling.
+	10. A beginner exercise may use double, but production billing should use BigDecimal or the application's existing currency type.
+	11. Eliminate duplicate discount logic.
+	12. Add or return the percentage from a single method.
+	13. The bill printer can receive the percentage as a parameter.
+	14. Add central input-validation tests.
+	15. Test negative values, zero values, NaN, infinity, blank names, and invalid text.
+
+Optional Improvements
+
+	•  Add transaction numbers and dates.
+	•  Add a menu for multiple bills.
+	•  Store completed transactions in a file or database.
+	•  Add logging for errors and completed transactions.
+	•  Add an upper value limit for price and quantity.
+	•  Add proper currency rounding such as half-up rounding.
+	•  Improve formatting by accepting decimal quantities only when required.
+	•  Allow two or more items in a future version.
+
+| Change | Priority | |---|---| | Reject NaN and Infinity | Critical | | Reject zero or negative price/quantity | Critical | | Use integer quantity | Critical, if whole units are required | | Use reliable currency arithmetic | Critical for real deployment | | Eliminate duplicate discount logic | Critical for maintainability | | Validate customer/product names | Recommended | | Add transaction storage | Optional for this console exercise | | Add transaction date/bill number | Optional | | Support multiple products | Optional |
+
+
+Part B
+Input:
+Write Java billing code.
+
+Output:
+package com.smartstore.billing;
+
+import java.util.Scanner;
+
+public class BillingApplication {
+
+    public static boolean isNumeric(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false;
+        }
+
+        try {
+            double value = Double.parseDouble(input);
+            return !Double.isNaN(value) && !Double.isInfinite(value);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static double calculateDiscount(double totalAmount) {
+        double discountPercentage = 0.0;
+
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            discountPercentage = 5.0;
+        } else if (totalAmount >= 5000.0) {
+            discountPercentage = 10.0;
+        }
+
+        return totalAmount * discountPercentage / 100.0;
+    }
+
+    public static void printBill(String customerName, String productName,
+                                 double totalAmount, double discountAmount,
+                                 double finalAmount) {
+        double discountPercentage = 0.0;
+
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            discountPercentage = 5.0;
+        } else if (totalAmount >= 5000.0) {
+            discountPercentage = 10.0;
+        }
+
+        System.out.println("\n--- SmartStore Bill ---");
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Product Name: " + productName);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+        System.out.printf("Discount Percentage: %.0f%%%n", discountPercentage);
+        System.out.printf("Discount Amount: Rs. %.2f%n", discountAmount);
+        System.out.printf("Final Amount: Rs. %.2f%n", finalAmount);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter product name: ");
+        String productName = scanner.nextLine();
+
+        System.out.print("Enter product price: ");
+        String productPriceInput = scanner.nextLine();
+
+        while (!isNumeric(productPriceInput)
+                || Double.parseDouble(productPriceInput) <= 0) {
+            System.out.print("Enter a valid product price (> 0): ");
+            productPriceInput = scanner.nextLine();
+        }
+
+        double productPrice = Double.parseDouble(productPriceInput);
+
+        System.out.print("Enter quantity: ");
+        String quantityInput = scanner.nextLine();
+
+        while (!isNumeric(quantityInput)
+                || Double.parseDouble(quantityInput) <= 0) {
+            System.out.print("Enter a valid quantity (> 0): ");
+            quantityInput = scanner.nextLine();
+        }
+
+        double quantity = Double.parseDouble(quantityInput);
+
+        double totalAmount = productPrice * quantity;
+        double discountAmount = calculateDiscount(totalAmount);
+        double finalAmount = totalAmount - discountAmount;
+
+        printBill(customerName, productName, totalAmount,
+                discountAmount, finalAmount);
+
+        scanner.close();
+    }
+}
+
+Input:
+Act as an experienced Java developer. Develop a billing application for a retail store using Java fundamentals. Accept customer name, product price and quantity. Calculate the total and apply discounts based on purchase amount. Use if-else statements and methods. Provide executable code with comments and sample output.
+
+Output:
+package com.smartstore.billing;
+
+import java.util.Scanner;
+
+/**
+ * SmartStore billing application.
+ * No discount below Rs. 1,000.
+ * 5% discount from Rs. 1,000 to Rs. 4,999.
+ * 10% discount for Rs. 5,000 and above.
+ */
+public class BillingApplication {
+
+    public static double calculateDiscount(double totalAmount) {
+        double discountPercentage = getDiscountPercentage(totalAmount);
+
+        // Convert the percentage to the discount amount in rupees
+        return totalAmount * discountPercentage / 100.0;
+    }
+
+    public static double getDiscountPercentage(double totalAmount) {
+        if (totalAmount >= 1000.0 && totalAmount < 5000.0) {
+            return 5.0;
+        } else if (totalAmount >= 5000.0) {
+            return 10.0;
+        }
+
+        return 0.0;
+    }
+
+    public static void printBill(String customerName, double totalAmount,
+                                 double discountAmount, double finalAmount) {
+        double discountPercentage = getDiscountPercentage(totalAmount);
+
+        System.out.println("\n--- SmartStore Bill ---");
+        System.out.println("Customer Name: " + customerName);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+        System.out.printf("Discount Percentage: %.0f%%%n",
+                discountPercentage);
+        System.out.printf("Discount Amount: Rs. %.2f%n", discountAmount);
+        System.out.printf("Final Amount: Rs. %.2f%n", finalAmount);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter product price: ");
+        double productPrice = readPositiveNumber(
+                scanner, "Enter a valid product price: ");
+
+        System.out.print("Enter quantity: ");
+        int quantity = (int) readPositiveNumber(
+                scanner, "Enter a valid quantity: ");
+
+        // Validate that the entered quantity is a whole number
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+        // Calculate purchase amount
+        double totalAmount = productPrice * quantity;
+
+        // Calculate discount and final amount
+        double discountAmount = calculateDiscount(totalAmount);
+        double finalAmount = totalAmount - discountAmount;
+
+        printBill(customerName, totalAmount, discountAmount, finalAmount);
+
+        scanner.close();
+    }
+
+    // Reads and validates positive numeric input
+    public static double readPositiveNumber(Scanner scanner, String prompt) {
+        while (!scanner.hasNextDouble()) {
+            System.out.print(prompt);
+            scanner.next();
+        }
+
+        double value = scanner.nextDouble();
+
+        while (value <= 0 || Double.isInfinite(value)
+                || Double.isNaN(value)) {
+            System.out.print(prompt);
+            while (!scanner.hasNextDouble()) {
+                scanner.next();
+            }
+            value = scanner.nextDouble();
+        }
+
+        return value;
+    }
+}
+
+
+Differences:
+1) Included sample output. This was due to the Output component instructing it to do so.
+2) Included comments, also due to the sample output instructing it to do so.
+3) The new version consolitates negative and number checking into a single readPositiveNumber class, potentially an effect of the Role?
+
+
+
+
+Final Part (Part 8):
+Input
+You are an experienced Java developer.
+
+Develop a simple Java employee salary calculator application for a retail store named SmartStore.
+The class must be named SalaryCalculator in package com.smartstore.billing.
+
+Requirements:
+1. Accept employee ID, employee name and basic salary.
+2. Calculate HRA (House Rent Allowance) as 20% of basic salary.
+3. Calculate DA (Dearness Allowance) as 10% of basic salary.
+4. Calculate gross salary: basic + HRA + DA.
+5. Deduct professional tax of ₹200 if gross salary is above ₹20,000.
+6. Display the employee details and net salary.
+
+Constraints:
+- Use Java fundamentals only: variables, data types, if-else and arithmetic operators.
+- Use Scanner for user input.
+- Do not use advanced Java features.
+- Write readable, beginner-friendly code.
+- Include comments explaining important logic.
+
+Generate a complete executable Java program with a main() method.
+
+Output:
+package com.smartstore.billing;
+
+import java.util.Scanner;
+
+public class SalaryCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept employee details
+        System.out.print("Enter employee ID: ");
+        int employeeId = scanner.nextInt();
+        scanner.nextLine(); // Clear the input buffer
+
+        System.out.print("Enter employee name: ");
+        String employeeName = scanner.nextLine();
+
+        System.out.print("Enter basic salary: ");
+        double basicSalary = scanner.nextDouble();
+
+        // Calculate salary components
+        double hra = basicSalary * 20 / 100;
+        double da = basicSalary * 10 / 100;
+        double grossSalary = basicSalary + hra + da;
+
+        // Professional tax applies when gross salary is above Rs. 20,000
+        double professionalTax = 0.0;
+
+        if (grossSalary > 20000.0) {
+            professionalTax = 200.0;
+        }
+
+        double netSalary = grossSalary - professionalTax;
+
+        // Display employee salary details
+        System.out.println("\n--- Employee Salary Details ---");
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Employee Name: " + employeeName);
+        System.out.printf("Basic Salary: Rs. %.2f%n", basicSalary);
+        System.out.printf("HRA (20%%): Rs. %.2f%n", hra);
+        System.out.printf("DA (10%%): Rs. %.2f%n", da);
+        System.out.printf("Gross Salary: Rs. %.2f%n", grossSalary);
+        System.out.printf("Professional Tax: Rs. %.2f%n", professionalTax);
+        System.out.printf("Net Salary: Rs. %.2f%n", netSalary);
+
+        scanner.close();
+    }
+}
+
+
+Input2:
+Act as a Java programming instructor.
+
+Explain the selected Java code line by line.
+
+For each important statement:
+1. Explain what it does.
+2. Explain why it is required.
+3. Identify the Java concept being used.
+4. Give a simple example where applicable.
+
+Pay special attention to:
+- Scanner and user input
+- Variables and data types
+- Arithmetic calculations
+- If-else conditions
+- Gross income and tax calculation
+- Output statements
+
+Explain everything in beginner-friendly language.
+
+Output2:
+Explains the code line-by-line, with the following summary:
+The complete processing flow is:
+
+	1. Read employee ID and name.
+	2. Read basic salary.
+	3. Calculate HRA and DA.
+	4. Calculate gross salary.
+	5. Apply professional tax only above Rs. 20,000.
+	6. Calculate net salary.
+	7. Print all salary details with formatted amounts.
+	
+
+Input3:
+Review the existing SalaryCalculator application.
+
+Refactor the code using these requirements:
+1. Move gross income calculation into a new, dedicated function named calculateGross()
+2. Move the calculation of professional tax into a new function called calculateProfessionalTax()
+3. Move the calculation of net salary into a new function called calculateNetSalary()
+3. Move the salary printing into a new function called printSalary
+3. Use meaningful variable and method names.
+4. Remove unnecessary code.
+5. Improve readability and maintainability.
+6. Do not change the existing business rules or the output format.
+7. Do not introduce advanced Java concepts.
+
+Explain the changes you made and why they improve the code.
+
+Output3:
+package com.smartstore.billing;
+
+import java.util.Scanner;
+
+public class SalaryCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter employee ID: ");
+        int employeeId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter employee name: ");
+        String employeeName = scanner.nextLine();
+
+        System.out.print("Enter basic salary: ");
+        double basicSalary = scanner.nextDouble();
+
+        double grossSalary = calculateGross(basicSalary);
+        double professionalTax =
+                calculateProfessionalTax(grossSalary);
+        double netSalary = calculateNetSalary(basicSalary);
+
+        printSalary(employeeId, employeeName, basicSalary,
+                grossSalary, professionalTax, netSalary);
+
+        scanner.close();
+    }
+
+    public static double calculateGross(double basicSalary) {
+        // HRA is 20% and DA is 10% of basic salary
+        double hra = basicSalary * 20 / 100;
+        double da = basicSalary * 10 / 100;
+
+        return basicSalary + hra + da;
+    }
+
+    // Calculates professional tax based on gross salary
+    public static double calculateProfessionalTax(double grossSalary) {
+        if (grossSalary > 20000.0) {
+            return 200.0;
+        }
+
+        return 0.0;
+    }
+    
+    // Calculates the net salary based on the basic salary
+    public static double calculateNetSalary(double basicSalary) {
+    	double gross = calculateGross(basicSalary);
+    	return gross - calculateProfessionalTax(gross);
+    }
+
+    public static void printSalary(int employeeId, String employeeName,
+                                   double basicSalary, double grossSalary,
+                                   double professionalTax,
+                                   double netSalary) {
+        double hra = basicSalary * 20 / 100;
+        double da = basicSalary * 10 / 100;
+
+        System.out.println("\n--- Employee Salary Details ---");
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Employee Name: " + employeeName);
+        System.out.printf("Basic Salary: Rs. %.2f%n", basicSalary);
+        System.out.printf("HRA (20%%): Rs. %.2f%n", hra);
+        System.out.printf("DA (10%%): Rs. %.2f%n", da);
+        System.out.printf("Gross Salary: Rs. %.2f%n", grossSalary);
+        System.out.printf("Professional Tax: Rs. %.2f%n", professionalTax);
+        System.out.printf("Net Salary: Rs. %.2f%n", netSalary);
+    }
+}
+
+
+Input4:
+I have a Java salary calculator application with this method:
+
+public static double calculateNetSalary(double basicSalary)
+
+Gross salary is basicSalary * 1.3. If the gross salary is above 20000, a -200 Rs. tax is applied.
+
+It returns the discount amount in rupees.
+Generate beginner-friendly JUnit 5 test methods for calculateNetSalary.
+
+Test the following:
+- Amount below whose gross salary is exactly 20000
+- Amount whose gross salary is above 20000 (50000)
+- Amount whose gross salary is below 20000 (15000)
+- Amount whose gross salary is 19999
+- Amount whose gross salary is below 10000 (9000)
+
+Use assertEquals(expected, actual, 0.001) for double values.
+Explain each test case and how the assertion verifies the expected result.
+Do not modify the business requirements.
+
+Output4:
+package com.smartstore.billing;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class SalaryCalculatorTest {
+
+    @Test
+    void testGrossSalaryExactly20000() {
+        // Basic salary: 20000 / 1.3
+        double actualNetSalary =
+                SalaryCalculator.calculateNetSalary(20000.0 / 1.3);
+
+        assertEquals(20000.0, actualNetSalary, 0.001);
+    }
+
+    @Test
+    void testGrossSalaryAbove20000() {
+        // Basic salary producing a gross salary above 20000
+        double actualNetSalary =
+                SalaryCalculator.calculateNetSalary(50000.0);
+
+        assertEquals(64800.0, actualNetSalary, 0.001);
+    }
+
+    @Test
+    void testGrossSalary15000() {
+        double actualNetSalary =
+                SalaryCalculator.calculateNetSalary(15000.0 / 1.3);
+
+        assertEquals(15000.0, actualNetSalary, 0.001);
+    }
+
+    @Test
+    void testGrossSalary19999() {
+        double actualNetSalary =
+                SalaryCalculator.calculateNetSalary(19999.0 / 1.3);
+
+        assertEquals(19999.0, actualNetSalary, 0.001);
+    }
+
+    @Test
+    void testGrossSalaryBelow10000() {
+        double actualNetSalary =
+                SalaryCalculator.calculateNetSalary(9000.0);
+
+        assertEquals(11700.0, actualNetSalary, 0.001);
+    }
+}
+
+
+Potential weaknesses:
+From Eyeballing It:
+No input verification for valid salary values (could be non-numeric or negative).
+Repeated hra and da logic
+
+Input5:
+Review the SmartStore billing application.
+
+Identify:
+1. Possible logical errors.
+2. Incorrect discount calculations.
+3. Potential invalid user inputs.
+4. Possible security or reliability issues.
+5. Improvements required before deploying this application.
+
+Explain which suggestions are critical and which are optional.
+
+Output5:
+1. Possible Logical Errors
+
+	•  Professional tax boundary is correct: Tax is Rs. 200 only when gross salary is strictly above Rs. 20,000.
+	•  HRA and DA calculations are correct: HRA is 20%, DA is 10%, and gross salary is basic + HRA + DA.
+	•  Net salary calculation is correct: Gross salary minus professional tax.
+	•  No blank-name validation: Employee names are accepted even if blank or whitespace-only.
+	•  Negative salary is accepted: The application can calculate a negative gross and net salary.
+	•  Tax threshold calculation uses `double`: Small floating-point precision differences are unlikely at exact salary boundaries but can affect financial rounding.
+
+2. Incorrect Discount Calculations
+
+There is no purchase discount calculation in this application. However, professional tax is applied correctly:
+
+| Gross Salary | Professional Tax | Net Salary | |---|---:|---:| | Rs. 20,000 | Rs. 0 | Rs. 20,000 | | Rs. 20,001 | Rs. 200 | Rs. 19,801 | | Rs. 25,000 | Rs. 200 | Gross minus Rs. 200 | | Rs. 50,000 | Rs. 200 | Gross minus Rs. 200 |
+
+No calculation formula currently gives an incorrect tax amount for normal valid inputs.
+
+3. Potential Invalid User Inputs
+
+Critical
+
+	•  Non-numeric employee ID or salary: nextInt() and nextDouble() can throw InputMismatchException.
+	•  Negative or zero basic salary: These values can create invalid salary records.
+	•  NaN or infinity: These values can enter through special numeric input and produce unreliable output.
+	•  Employee ID as `int`: It may not accommodate IDs containing leading zeros or special identifiers.
+	•  Blank employee name: An empty name can be stored or printed.
+
+Optional
+
+	•  Extremely large salaries may cause overflow or formatting problems.
+	•  A negative or zero employee ID may be meaningless but is not currently validated.
+	•  Names containing only spaces are not considered valid data.
+
+4. Security and Reliability Issues
+
+	•  No input validation: Invalid input may terminate the application.
+	•  No audit trail: Salary calculations are printed but not stored.
+	•  No authentication or authorization: An employee or administrator could run it without system-level access control.
+	•  No transaction logging: Completed salary calculations cannot be reviewed later.
+	•  Currency precision: double is not ideal for exact financial calculations.
+	•  Limited application scope: This is a console application, so network and database security risks are not currently present.
+	•  Scanner resource management: scanner.close() is called during normal execution, which is good practice.
+
+For this exercise, authentication and database security are not immediate risks. Input validation and reliable calculations are more important.
+
+5. Improvements Required Before Deployment
+
+Critical
+
+	1. Validate numeric input
+	2. Check input before calling nextInt() or nextDouble().
+	3. Reject non-numeric values and re-prompt the user.
+	4. Reject invalid salaries
+	5. Require basic salary to be greater than zero.
+	6. Reject NaN and Infinity.
+	7. Validate employee details
+	8. Reject blank or whitespace-only names.
+	9. Reject invalid or negative employee IDs if IDs must be positive.
+	10. Centralize salary calculations
+	11. calculateNetSalary() currently calculates gross salary and tax again.
+	12. This duplicates the gross and tax logic already used in main().
+	13. Consider passing grossSalary and professionalTax to the net calculation or ensuring every net result is calculated from one source.
+	14. Use reliable currency values
+	15. double is suitable for a beginner exercise.
+	16. Production payroll should use a precise currency representation and define rounding rules.
+
+Recommended
+
+	1. Add input re-prompting
+	2. Avoid terminating when the user enters invalid data.
+	3. Use a more appropriate employee ID type
+	4. Use String for IDs containing letters or leading zeros.
+	5. Add automated tests
+	6. Test gross salary exactly at Rs. 20,000.
+	7. Test just above Rs. 20,000.
+	8. Test negative salaries and invalid input where validation is required.
+
+Optional
+
+	1. Store salary records
+	2. Add bill or payroll numbers
+	3. Add calculation dates
+	4. Add logging
+	5. Add an employee database or file export
+	6. Add authentication and authorization
+	7. Support multiple employees in one run
+
+Priority Summary
+
+| Improvement | Priority | |---|---| | Reject invalid or negative salary | Critical | | Handle non-numeric input | Critical | | Reject NaN and infinity | Critical | | Validate employee names and IDs | Recommended | | Remove duplicated salary calculations | Recommended | | Use precise currency arithmetic | Critical for real payroll | | Store salary records | Optional | | Add authentication | Optional for this console exercise | | Add transaction logging | Optional |

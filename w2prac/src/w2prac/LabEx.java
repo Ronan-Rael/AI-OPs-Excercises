@@ -32,6 +32,7 @@ public class LabEx {
 		System.out.println("Compare with 10.5: " + Double.compare(n, 10.56));
 	}
 	
+	// Integer caches -128 to 127, so == compares the same object for 127 but two different objects for 1000. Use equals for wrapper values.
 	public static boolean sameValue(Integer a, Integer b) {
 		return a.equals(b);
 	}
@@ -42,6 +43,13 @@ public class LabEx {
 	
 	public static double widen(int i) {
 		return i;
+	}
+	
+	// 130 is 2 more than the byte maximum of 127, so it wraps: 130 - 256 = -126.
+	public static void overflowDemo() {
+		int big = 130;
+		byte b = (byte) big; // overflow occurs here
+		System.out.println(b);
 	}
 	
 	public static char shiftLetter(char c, int n) {
@@ -66,6 +74,7 @@ public class LabEx {
 		sb.append("!");
 	}
 	
+	// the parameter holds a copy of the reference. Pointing the copy at a new object does not move the caller's variable.
 	public static void replaceBuilder(StringBuilder sb) {
 		sb = new StringBuilder("New");
 	}
@@ -145,6 +154,7 @@ public class LabEx {
 		return endTime - startTime;
 	}
 	
+	// use StringBuffer when several threads may change the same text, because its methods are synchronized. Otherwise use the faster StringBuilder.
 	public static String safeAppend(StringBuffer sb, String s) {
 		if (sb == null) {
 			sb = new StringBuffer();
@@ -193,6 +203,9 @@ public class LabEx {
 		System.out.println();
 		
 		System.out.println(widen(7));
+		System.out.println();
+		
+		overflowDemo();
 		System.out.println();
 		
 		System.out.println(shiftLetter('a', 2));

@@ -1,5 +1,7 @@
 package com.emp;
 
+import java.util.Objects;
+
 public class Employee {
 	int id;
 	StringBuilder name;
@@ -46,6 +48,30 @@ public class Employee {
 	public boolean getOver75T() {
 		return getFinalSalary() > 75000.0;
 	}
+	
+	@Override
+	protected void finalize() throws Throwable{
+		System.out.println("Employee " + id + " is garbage collected.");
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(Double.valueOf(bonus), Integer.valueOf(id), name, Double.valueOf(salary),
+				Boolean.valueOf(status));
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Double.doubleToLongBits(bonus) == Double.doubleToLongBits(other.bonus) && id == other.id
+				&& Double.doubleToLongBits(salary) == Double.doubleToLongBits(other.salary) && status == other.status;
+	}
+	
 	@Override
 	public String toString() {
 		return "Employee ID: " + id +

@@ -60,9 +60,9 @@ public abstract class Account {
 		this.dateCreated = dateCreated;
 	}
 	
-	Account(int accountNumber, int customerId, String accountType, double accountBalance, LocalDate dateCreated){
+	Account(int accountNumber, int customerID, String accountType, double accountBalance, LocalDate dateCreated){
 		this.accountNumber = accountNumber;
-		this.customerID = customerId;
+		this.customerID = customerID;
 		this.accountType = accountType;
 		this.accountBalance = accountBalance;
 		this.dateCreated = dateCreated;

@@ -209,11 +209,11 @@ public class BillingApplication {
 
 EX5: 
 Input:
-2. Purchase amount exactly Rs. 1,000.
-3. Purchase amount Rs. 4,999.
-4. Purchase amount exactly Rs. 5,000.
-5. Purchase amount above Rs. 5,000.
-6. Quantity greater than one.
+1. Purchase amount exactly Rs. 1,000.
+2. Purchase amount Rs. 4,999.
+3. Purchase amount exactly Rs. 5,000.
+4. Purchase amount above Rs. 5,000.
+5. Quantity greater than one.
 
 For each test case provide:
 - Test input (price and quantity)
@@ -276,6 +276,10 @@ Additional Edge Cases
 	
 EX6: 
 Input:
+I have a Java billing application with this method:
+
+public static double calculateDiscount(double totalAmount)
+
 It returns the discount amount in rupees.
 Generate beginner-friendly JUnit 5 test methods for it.
 

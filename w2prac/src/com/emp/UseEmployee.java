@@ -1,5 +1,7 @@
 package com.emp;
 
+import java.util.Scanner;
+
 public class UseEmployee {
 	
 	static {
@@ -22,6 +24,18 @@ public class UseEmployee {
 		
 		System.gc();
 		System.out.println("main method completed");
+		
+		Employee p3 = new PermanentEmployee(101, "Rahul", 60000, 20, true);
+		System.out.println(p3);
+		Scanner sc = new Scanner(System.in);
+		
+		PermanentEmployee p4 = (PermanentEmployee)p3;
+		
+		System.out.println("Echo Something: ");
+		String echoer = sc.nextLine();
+		System.out.println(echoer);
+		int id = sc.nextInt();
+		System.out.println(id);
 	}
 	
 	

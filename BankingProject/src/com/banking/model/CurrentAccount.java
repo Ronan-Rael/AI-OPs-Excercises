@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class CurrentAccount extends Account{
 	
 	CurrentAccount(int accountNumber, int customerId, double accountBalance, LocalDate dateCreated){
-		super(accountNumber, customerId, "Current", accountBalance, dateCreated);
+		super(accountNumber, customerId, "CURRENT", accountBalance, dateCreated);
 	}
 	
 	public static void main(String[] args) {

@@ -3,11 +3,11 @@ package com.emp;
 import java.util.Objects;
 
 public class Employee {
-	int id;
-	StringBuilder name;
-	double salary;
-	double bonus;
-	boolean status;
+	protected int id;
+	protected StringBuilder name;
+	protected double salary;
+	protected double bonus;
+	protected boolean status;
 	Employee(){
 		name = new StringBuilder();
 	}

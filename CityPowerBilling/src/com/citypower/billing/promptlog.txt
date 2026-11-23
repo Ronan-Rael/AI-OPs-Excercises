@@ -1,0 +1,909 @@
+Prompt 1:
+You are an experienced Java developer.
+
+Develop a simple Java command line application for a city billing electricity consumers.
+The class must be named ElectricityBillApplication in package com.citypower.billing.
+
+Requirements:
+1. Accept the consumer number, consumer name, previous meter reading and current meter reading.
+2. Calculate units consumed: current reading − previous reading.
+3. Reject the bill if the current reading is less than the previous reading, with a clear error message.
+4. Calculate the energy charge using the slab rates below.
+5. Add a fixed monthly charge of ₹50.
+6. Add a surcharge of 5% of the energy charge if the energy charge is above ₹2,000.
+7. Display the bill: consumer details, units, energy charge, fixed charge, surcharge and total amount, with amounts to 2 decimal places.
+
+Constraints:
+- Use Java fundamentals only: variables, data types, if-else and arithmetic operators.
+- Use Scanner for user input.
+- Do not use advanced Java features.
+- Write readable, beginner-friendly code.
+- Include comments explaining important logic.
+
+Generate a complete executable Java program with a main() method.
+
+Output 1:
+package com.citypower.billing;
+
+import java.util.Scanner;
+
+public class ElectricityBillApplication {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept consumer details
+        System.out.print("Enter consumer number: ");
+        int consumerNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter consumer name: ");
+        String consumerName = scanner.nextLine();
+
+        System.out.print("Enter previous meter reading: ");
+        double previousReading = scanner.nextDouble();
+
+        System.out.print("Enter current meter reading: ");
+        double currentReading = scanner.nextDouble();
+
+        // Units must not be negative
+        if (currentReading < previousReading) {
+            System.out.println("Error: Current meter reading cannot be less "
+                    + "than the previous meter reading.");
+            scanner.close();
+            return;
+        }
+
+        double unitsConsumed = currentReading - previousReading;
+
+        // Calculate energy charge using slab rates
+        double energyCharge = 0.0;
+
+        if (unitsConsumed <= 100) {
+            energyCharge = unitsConsumed * 2.0;
+        } else if (unitsConsumed <= 200) {
+            energyCharge = (100 * 2.0)
+                    + ((unitsConsumed - 100) * 3.0);
+        } else if (unitsConsumed <= 500) {
+            energyCharge = (100 * 2.0)
+                    + (100 * 3.0)
+                    + ((unitsConsumed - 200) * 5.0);
+        } else {
+            energyCharge = (100 * 2.0)
+                    + (100 * 3.0)
+                    + (300 * 5.0)
+                    + ((unitsConsumed - 500) * 7.0);
+        }
+
+        // Fixed charge and surcharge
+        double fixedCharge = 50.0;
+        double surcharge = 0.0;
+
+        if (energyCharge > 2000.0) {
+            surcharge = energyCharge * 5 / 100;
+        }
+
+        double totalAmount = energyCharge + fixedCharge + surcharge;
+
+        // Display the electricity bill
+        System.out.println("\n--- CityPower Electricity Bill ---");
+        System.out.println("Consumer Number: " + consumerNumber);
+        System.out.println("Consumer Name: " + consumerName);
+        System.out.printf("Units Consumed: %.2f%n", unitsConsumed);
+        System.out.printf("Energy Charge: Rs. %.2f%n", energyCharge);
+        System.out.printf("Fixed Monthly Charge: Rs. %.2f%n", fixedCharge);
+        System.out.printf("Surcharge: Rs. %.2f%n", surcharge);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+
+        scanner.close();
+    }
+}
+
+
+Prompt 1b:
+The consumer number is a String, not an int. Ammend that in the previous answer.
+
+Output 1b:
+package com.citypower.billing;
+
+import java.util.Scanner;
+
+public class ElectricityBillApplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept consumer details
+        System.out.print("Enter consumer number: ");
+        String consumerNumber = scanner.nextLine();
+
+        System.out.print("Enter consumer name: ");
+        String consumerName = scanner.nextLine();
+
+        System.out.print("Enter previous meter reading: ");
+        double previousReading = scanner.nextDouble();
+
+        System.out.print("Enter current meter reading: ");
+        double currentReading = scanner.nextDouble();
+
+        // Reject the bill if the current reading is lower
+        if (currentReading < previousReading) {
+            System.out.println("Error: Current meter reading cannot be less "
+                    + "than the previous meter reading.");
+            scanner.close();
+            return;
+        }
+
+        double unitsConsumed = currentReading - previousReading;
+
+        // Calculate energy charge using slab rates
+        double energyCharge = 0.0;
+
+        if (unitsConsumed <= 100) {
+            energyCharge = unitsConsumed * 2.0;
+        } else if (unitsConsumed <= 200) {
+            energyCharge = (100 * 2.0)
+                    + ((unitsConsumed - 100) * 3.0);
+        } else if (unitsConsumed <= 500) {
+            energyCharge = (100 * 2.0)
+                    + (100 * 3.0)
+                    + ((unitsConsumed - 200) * 5.0);
+        } else {
+            energyCharge = (100 * 2.0)
+                    + (100 * 3.0)
+                    + (300 * 5.0)
+                    + ((unitsConsumed - 500) * 7.0);
+        }
+
+        double fixedCharge = 50.0;
+        double surcharge = 0.0;
+
+        if (energyCharge > 2000.0) {
+            surcharge = energyCharge * 5 / 100;
+        }
+
+        double totalAmount = energyCharge + fixedCharge + surcharge;
+
+        // Display electricity bill
+        System.out.println("\n--- CityPower Electricity Bill ---");
+        System.out.println("Consumer Number: " + consumerNumber);
+        System.out.println("Consumer Name: " + consumerName);
+        System.out.printf("Units Consumed: %.2f%n", unitsConsumed);
+        System.out.printf("Energy Charge: Rs. %.2f%n", energyCharge);
+        System.out.printf("Fixed Monthly Charge: Rs. %.2f%n", fixedCharge);
+        System.out.printf("Surcharge: Rs. %.2f%n", surcharge);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+
+        scanner.close();
+    }
+}
+
+Prompt 1c:
+The slab rates should be the following:
+First 100 units (1–100): ₹3.00/unit
+Next 200 units (101–300): ₹5.00/unit
+Units above 300: ₹7.50/unit
+
+Amend this in the previous answer.
+
+Output 1c:
+package com.citypower.billing;
+
+import java.util.Scanner;
+
+public class ElectricityBillApplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept consumer details
+        System.out.print("Enter consumer number: ");
+        String consumerNumber = scanner.nextLine();
+
+        System.out.print("Enter consumer name: ");
+        String consumerName = scanner.nextLine();
+
+        System.out.print("Enter previous meter reading: ");
+        double previousReading = scanner.nextDouble();
+
+        System.out.print("Enter current meter reading: ");
+        double currentReading = scanner.nextDouble();
+
+        // Reject the bill if the current reading is lower
+        if (currentReading < previousReading) {
+            System.out.println("Error: Current meter reading cannot be less "
+                    + "than the previous meter reading.");
+            scanner.close();
+            return;
+        }
+
+        double unitsConsumed = currentReading - previousReading;
+
+        // Calculate energy charge using the slab rates
+        double energyCharge = 0.0;
+
+        if (unitsConsumed <= 100) {
+            energyCharge = unitsConsumed * 3.0;
+        } else if (unitsConsumed <= 300) {
+            energyCharge = (100 * 3.0)
+                    + ((unitsConsumed - 100) * 5.0);
+        } else {
+            energyCharge = (100 * 3.0)
+                    + (200 * 5.0)
+                    + ((unitsConsumed - 300) * 7.50);
+        }
+
+        double fixedCharge = 50.0;
+        double surcharge = 0.0;
+
+        if (energyCharge > 2000.0) {
+            surcharge = energyCharge * 5 / 100;
+        }
+
+        double totalAmount = energyCharge + fixedCharge + surcharge;
+
+        // Display electricity bill
+        System.out.println("\n--- CityPower Electricity Bill ---");
+        System.out.println("Consumer Number: " + consumerNumber);
+        System.out.println("Consumer Name: " + consumerName);
+        System.out.printf("Units Consumed: %.2f%n", unitsConsumed);
+        System.out.printf("Energy Charge: Rs. %.2f%n", energyCharge);
+        System.out.printf("Fixed Monthly Charge: Rs. %.2f%n", fixedCharge);
+        System.out.printf("Surcharge: Rs. %.2f%n", surcharge);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+
+        scanner.close();
+    }
+}
+
+
+Prompt 2:
+Act as an experienced Java teacher.
+Explain the selected code one line at a time, paying close attention to Java fundamentals. Explain what the code does, and why it is required for this application.
+You are explaining to a Java programmer who has past experience, but is a bit rusty, and so is regaining their sea legs.
+Explain everything in beginner-friendly language.
+
+Output 2:
+A explanation of java basics from a high level, detailing each line. Includes the following summary.
+The complete flow is:
+
+	1. Read consumer information.
+	2. Read both meter readings.
+	3. Reject invalid readings.
+	4. Calculate consumed units.
+	5. Apply the correct electricity slab.
+	6. Add fixed and possible surcharge charges.
+	7. Print the complete bill.
+
+How does the code split 400 units into slabs?
+The first 100 is given the price/unit of 3.00, the next 200 are given 5.00, and the final 100 are given 7.50.
+This occurs because it falls into the final else condition of the unitsConsumed checker
+
+Which condition decides the surcharge, and what happens at exactly ₹2,000?
+The energy charge being above 2000. At exactly 2000, no surcharge applies.
+
+How does the program read a name with spaces?
+It accepts spaces wherever they are, which may need to be fixed later.
+
+Did Copilot's explanation contain anything wrong or unclear? What?
+Nothing seemed unclear to me. It didn’t get too into the weeds with anything because I specified it to focus on fundamentals.
+
+
+Before:
+--- CityPower Electricity Bill ---
+Consumer Number: CP1001
+Consumer Name: Priya Sharma
+Units Consumed: 400.00
+Energy Charge: Rs. 2050.00
+Fixed Monthly Charge: Rs. 50.00
+Surcharge: Rs. 102.50
+Total Amount: Rs. 2202.50
+
+Prompt 3:
+Refactor the code using these requirements:
+1. Move energy charge calculation into a new method. It should return the charge in rupees, using the slab rates. 
+Use the following exact signature: public static double calculateEnergyCharge(int units);
+2. Move surcharge calculation into a new method. It should return the surcharge in rupees. 
+Use the following exact signature: public static double calculateSurcharge(double energyCharge)
+3. Move total calculation into a new method. It should return the total (Energy charge + ₹50 fixed charge + surcharge) in rupees. 
+Use the following exact signature: public static double calculateTotal(double energyCharge)
+4. Move bill printing method to a new method, printBill(...).
+5. Use meaningful variable and method names.
+6. Replace magic numbers (100, 300, 3.00, 5.00, 7.50, 50, 2000, 0.05) with named constants.
+7. Remove unnecessary code.
+8. Improve readability and maintainability.
+9. Do not change the existing business rules or the output format.
+10. Do not introduce advanced Java concepts.
+11. Explain each change and why it helps.
+
+Output 3:
+package com.citypower.billing;
+
+import java.util.Scanner;
+
+public class ElectricityBillApplication {
+    public static final int FIRST_SLAB_LIMIT = 100;
+    public static final int SECOND_SLAB_LIMIT = 300;
+
+    public static final double FIRST_SLAB_RATE = 3.00;
+    public static final double SECOND_SLAB_RATE = 5.00;
+    public static final double THIRD_SLAB_RATE = 7.50;
+
+    public static final double FIXED_MONTHLY_CHARGE = 50.00;
+    public static final double SURCHARGE_LIMIT = 2000.00;
+    public static final double SURCHARGE_RATE = 0.05;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter consumer number: ");
+        String consumerNumber = scanner.nextLine();
+
+        System.out.print("Enter consumer name: ");
+        String consumerName = scanner.nextLine();
+
+        System.out.print("Enter previous meter reading: ");
+        double previousReading = scanner.nextDouble();
+
+        System.out.print("Enter current meter reading: ");
+        double currentReading = scanner.nextDouble();
+
+        if (currentReading < previousReading) {
+            System.out.println("Error: Current meter reading cannot be less "
+                    + "than the previous meter reading.");
+            scanner.close();
+            return;
+        }
+
+        double unitsConsumed = currentReading - previousReading;
+
+        // Convert consumed units to an integer for the requested method
+        int units = (int) unitsConsumed;
+
+        double energyCharge = calculateEnergyCharge(units);
+        double surcharge = calculateSurcharge(energyCharge);
+        double totalAmount = calculateTotal(energyCharge);
+
+        printBill(consumerNumber, consumerName, unitsConsumed,
+                energyCharge, surcharge, totalAmount);
+
+        scanner.close();
+    }
+
+    public static double calculateEnergyCharge(int units) {
+        double energyCharge = 0.0;
+
+        if (units <= FIRST_SLAB_LIMIT) {
+            energyCharge = units * FIRST_SLAB_RATE;
+        } else if (units <= SECOND_SLAB_LIMIT) {
+            energyCharge = (FIRST_SLAB_LIMIT * FIRST_SLAB_RATE)
+                    + ((units - FIRST_SLAB_LIMIT) * SECOND_SLAB_RATE);
+        } else {
+            energyCharge = (FIRST_SLAB_LIMIT * FIRST_SLAB_RATE)
+                    + ((SECOND_SLAB_LIMIT - FIRST_SLAB_LIMIT)
+                            * SECOND_SLAB_RATE)
+                    + ((units - SECOND_SLAB_LIMIT) * THIRD_SLAB_RATE);
+        }
+
+        return energyCharge;
+    }
+
+    public static double calculateSurcharge(double energyCharge) {
+        if (energyCharge > SURCHARGE_LIMIT) {
+            return energyCharge * SURCHARGE_RATE;
+        }
+
+        return 0.0;
+    }
+
+    public static double calculateTotal(double energyCharge) {
+        double surcharge = calculateSurcharge(energyCharge);
+        return energyCharge + FIXED_MONTHLY_CHARGE + surcharge;
+    }
+
+    public static void printBill(String consumerNumber,
+                                 String consumerName,
+                                 double unitsConsumed,
+                                 double energyCharge,
+                                 double surcharge,
+                                 double totalAmount) {
+        System.out.println("\n--- CityPower Electricity Bill ---");
+        System.out.println("Consumer Number: " + consumerNumber);
+        System.out.println("Consumer Name: " + consumerName);
+        System.out.printf("Units Consumed: %.2f%n", unitsConsumed);
+        System.out.printf("Energy Charge: Rs. %.2f%n", energyCharge);
+        System.out.printf("Fixed Monthly Charge: Rs. %.2f%n",
+                FIXED_MONTHLY_CHARGE);
+        System.out.printf("Surcharge: Rs. %.2f%n", surcharge);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+    }
+}
+
+After:
+--- CityPower Electricity Bill ---
+Consumer Number: CP1001
+Consumer Name: Priya Sharma
+Units Consumed: 400.00
+Energy Charge: Rs. 2050.00
+Fixed Monthly Charge: Rs. 50.00
+Surcharge: Rs. 102.50
+Total Amount: Rs. 2202.50
+
+
+Prompt 4:
+Act as a software tester.
+Cover the following test cases.
+- Invalid units amount: Units < 0. Should return -1.0
+- Units below 100 (50)
+- Units exactly 100
+- Units amount above 100, but below 300 (150)
+- Units exactly 300
+- Units above 300 but below the price surcharge threshold
+- Units giving a price exactly at the surcharge threshold of 2000 (surcharge should not apply)
+- Units giving a price above the surcharge threshold
+
+For each test case provide:
+- Input reading
+- Units
+- Energy charge
+- Surcharge
+- Total
+
+Identify any additional edge cases that should be tested.
+
+Output 4:
+| Case | Meter readings | Units | Energy charge | Surcharge | Total | 
+|---|---:|---:|---:|---:|---:| 
+| Negative units | Previous: 10, Current: 5 | -5 direct method | Rs. -1.00 | Rs. 0.00 | Not applicable; invalid result | 
+| Below 100 | Previous: 0, Current: 50 | 50 | Rs. 150.00 | Rs. 0.00 | Rs. 200.00 | 
+| Exactly 100 | Previous: 0, Current: 100 | 100 | Rs. 300.00 | Rs. 0.00 | Rs. 350.00 | 
+| Above 100, below 300 | Previous: 0, Current: 150 | 150 | Rs. 550.00 | Rs. 0.00 | Rs. 600.00 | 
+| Exactly 300 | Previous: 0, Current: 300 | 300 | Rs. 1,300.00 | Rs. 0.00 | Rs. 1,350.00 | 
+| Above 300, below threshold | Previous: 0, Current: 350 | 350 | Rs. 1,675.00 | Rs. 0.00 | Rs. 1,725.00 | 
+| Exactly at surcharge threshold | Direct charge test: Rs. 2,000 | No exact integer-unit value | Rs. 2,000.00 | Rs. 0.00 | Rs. 2,050.00 | 
+| Above surcharge threshold | Previous: 0, Current: 400 | 400 | Rs. 2,050.00 | Rs. 102.50 | Rs. 2,202.50 |
+
+Calculations
+
+	•  Negative units: calculateEnergyCharge(-5) must immediately return -1.0. The surcharge and bill total should not be calculated for invalid input.
+	•  50 units: (50 \times 3 = 150).
+	•  100 units: (100 \times 3 = 300).
+	•  150 units: ((100 \times 3) + (50 \times 5) = 550).
+	•  300 units: ((100 \times 3) + (200 \times 5) = 1,300).
+	•  350 units: (1,300 + (50 \times 7.50) = 1,675).
+	•  Rs. 2,000: calculateSurcharge(2000.0) must return 0.0 because the surcharge applies only when the charge is greater than Rs. 2,000.
+	•  400 units: (1,300 + (100 \times 7.50) = 2,050). The surcharge is (2,050 \times 0.05 = 102.50). The total is (2,050 + 50 + 102.50 = 2,202.50).
+
+No whole-number unit count produces exactly Rs. 2,000:
+
+	•  393 units produce Rs. 2,047.50.
+	•  Exactly Rs. 2,000 would require 266.666666... units, but calculateEnergyCharge accepts an int.
+
+Additional Edge Cases
+
+	•  0 units: Energy charge Rs. 0.00, surcharge Rs. 0.00, total Rs. 50.00.
+	•  99 units: Verify the first slab just before the boundary.
+	•  101 units: Verify entry into the second slab.
+	•  299 and 301 units: Verify the second-slab upper boundary and third-slab lower boundary.
+	•  393 units: Charge Rs. 2,047.50 and is above the surcharge threshold.
+	•  Unit reads directly below/above Rs. 2,000: Test 393 and 394 units, or test calculateSurcharge(1999.99) and calculateSurcharge(2000.01).
+	•  Equal meter readings: 0 units with a valid zero-consumption bill.
+	•  Previous reading greater than current: Application should display the existing validation error.
+	•  Decimal meter readings: Verify whether truncation to an int is acceptable; for example, 150.75 units may become 150 units.
+	•  Very large units: Confirm that the integer or calculated double does not overflow unexpectedly.
+	•  Invalid direct total: If calculateTotal(-1.0) is tested, confirm the method does not silently produce a normal bill; the invalid charge may need explicit handling.
+
+See ElectricityBillApplication.java for the relevant calculation and surcharge methods.
+
+Prompt 5:
+I have a Java energy charge calculation application with this method:
+public static double calculateEnergyCharge(int units) 
+
+It returns the charge amount in rupees
+Generate beginner-friendly JUnit 5 test methods for it.
+
+Test the following:
+- Invalid units amount: Units < 0. Should return -1.0
+- Units below 100 (50): Energy charge 150, total 200
+- Units exactly 100: Energy charge of 300, total of 350
+- Units amount above 100, but below 300 (150): Energy charge of 550, total of 600
+- Units exactly 300: Energy charge of 1300, total of 1350
+- Units above 300 but below the price surcharge threshold (350): Energy charge of 1675, total of 1725
+- Units giving a price exactly at the surcharge threshold of 2000 (surcharge should not apply): Surcharge of 0
+- Units giving a price above the surcharge threshold (400): Energy charge of 2050, Surcharge of 102.5
+
+Use assertEquals(expected, actual, 0.001) for double values.
+Explain each test case and how the assertion verifies the expected result.
+Do not modify the business requirements.
+
+Output 5:
+package com.citypower.billing;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+class ElectricityBillApplicationTest {
+
+    @Test
+    void testNegativeUnitsReturnsMinusOne() {
+        double actual = ElectricityBillApplication.calculateEnergyCharge(-1);
+
+        assertEquals(-1.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsBelow100() {
+        // 50 units × Rs. 3.00 = Rs. 150.00
+        double actual = ElectricityBillApplication.calculateEnergyCharge(50);
+
+        assertEquals(150.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsExactly100() {
+        // 100 units × Rs. 3.00 = Rs. 300.00
+        double actual = ElectricityBillApplication.calculateEnergyCharge(100);
+
+        assertEquals(300.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsAbove100AndBelow300() {
+        // First 100 units: 100 × 3 = Rs. 300
+        // Remaining 50 units: 50 × 5 = Rs. 250
+        // Total = Rs. 550
+        double actual = ElectricityBillApplication.calculateEnergyCharge(150);
+
+        assertEquals(550.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsExactly300() {
+        // First 100 units: Rs. 300
+        // Remaining 200 units: 200 × 5 = Rs. 1000
+        // Total = Rs. 1300
+        double actual = ElectricityBillApplication.calculateEnergyCharge(300);
+
+        assertEquals(1300.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsAbove300AndBelowSurchargeThreshold() {
+        // First 300 units cost Rs. 1300
+        // Remaining 50 units: 50 × 7.50 = Rs. 375
+        // Total = Rs. 1675
+        double actual = ElectricityBillApplication.calculateEnergyCharge(350);
+
+        assertEquals(1675.0, actual, 0.001);
+    }
+
+    @Test
+    void testSurchargeDoesNotApplyAtExactly2000() {
+        double actual = ElectricityBillApplication.calculateSurcharge(2000.0);
+
+        assertEquals(0.0, actual, 0.001);
+    }
+
+    @Test
+    void testUnitsAboveSurchargeThreshold() {
+        // 400 units = Rs. 2050, so the 5% surcharge applies
+        double energyCharge =
+                ElectricityBillApplication.calculateEnergyCharge(400);
+        double actual =
+                ElectricityBillApplication.calculateSurcharge(energyCharge);
+
+        assertEquals(2050.0, energyCharge, 0.001);
+        assertEquals(102.5, actual, 0.001);
+    }
+}
+
+Prompt 5b:
+Write an additional unit test for units = 0;
+
+Output 5b:
+@Test
+void testZeroUnits() {
+    double actualCharge =
+            ElectricityBillApplication.calculateEnergyCharge(0);
+
+    assertEquals(0.0, actualCharge, 0.001);
+}
+
+
+Prompt 6:
+Acting as a senior code reviewer, review the CityEnergy charge calculation application.
+
+Identify:
+1. Possible logical errors.
+2. Incorrect calculations.
+3. Potential invalid user inputs.
+4. Possible security or reliability issues.
+5. Improvements required before deploying this application.
+
+Explain which suggestions are critical and which are optional.
+
+Output 6:
+Senior Code Review
+
+1. Critical logical errors
+
+	•  Decimal readings are silently truncated
+  int units = (int) unitsConsumed;
+Meter usage of 150.75 becomes 150, potentially undercharging the customer. This is loss of precision and should be documented or removed.
+
+	•  Exactly Rs. 2,000 cannot be reached with integer units The third slab produces:
+	•  393 units: Rs. 1,997.50
+	•  394 units: Rs. 2,005.00
+
+Therefore, no whole-number unit count falls exactly at Rs. 2,000. There is no defect here if the threshold is intended to be inclusive/exclusive and integer-unit consumption is required.
+
+	•  Negative energy charges are not fully protected calculateEnergyCharge(-1) returns -1.0, but calculateTotal(-1.0) can still calculate -1.0 + 50.0 = 49.0. Callers should reject negative charges consistently.
+	•  Invalid readings can be mishandled The application only detects currentReading < previousReading. It does not reject negative readings or non-finite values. Equal readings are valid and should result in a zero-unit bill.
+	•  The method does not validate invalid energy charges Passing -1.0 to calculateSurcharge or calculateTotal should not be treated as a valid bill.
+	•  Surcharge threshold comparison
+  if (energyCharge > SURCHARGE_LIMIT)
+This correctly excludes exactly Rs. 2,000. It should remain unchanged unless the specification says “at or above.”
+
+2. Incorrect calculations
+
+The implementation is mathematically correct:
+
+	•  Energy charge: Rs. 2,050.00
+	•  Surcharge: 2050.00 × 0.05 = 102.50
+	•  Total: 2050.00 + 50.00 + 102.50 = 2202.50
+
+Incorrect handling would occur if:
+
+	•  The surcharge were applied to the complete bill instead of the energy charge.
+	•  The fixed charge were included in the surcharge base.
+	•  The threshold were treated as inclusive.
+	•  The surcharge were calculated again or added twice.
+
+The main method currently computes the surcharge separately and then calculateTotal computes it again internally. It is not doubled in the displayed bill, because the separately computed value is passed only to printBill, while calculateTotal performs its own calculation. However, this duplicated logic is confusing and can cause inconsistent results if the methods change.
+
+3. Invalid user inputs
+
+Potential invalid inputs include:
+
+	•  Previous/current meter readings containing text or being incomplete.
+	•  Negative meter readings.
+	•  NaN or infinity.
+	•  Current reading lower than the previous reading.
+	•  Extremely large readings.
+	•  Extremely large decimal values that overflow double.
+	•  Empty consumer number or consumer name.
+	•  Difference too large to fit in an int.
+
+The application currently does not catch InputMismatchException, so invalid text may terminate the entire program with an exception and a stack trace.
+
+4. Security and reliability issues
+
+For this console application:
+
+	•  Input is not untrusted network input, so classic SQL injection or authentication issues do not apply.
+	•  Consumer names/numbers are currently only printed, not persisted or transmitted.
+	•  Malformed input can crash the application.
+	•  double calculations can lose precision and represent currency approximately.
+	•  Formatting and rounding depend on locale.
+	•  Scanner.close() is not guaranteed to execute when an unexpected exception occurs.
+	•  Integer overflow could occur before conversion if meter values are very large.
+
+5. Improvements before deployment
+
+Critical
+
+	1. Validate both meter readings:
+	2. Reject negative values.
+	3. Reject NaN and infinity.
+	4. Reject current reading below previous reading.
+	5. Verify the difference is representable by the chosen unit type.
+	6. Add safe input handling:
+	7. Catch InputMismatchException.
+	8. Display a friendly error instead of a stack trace.
+	9. Retry or exit cleanly.
+	10. Remove silent decimal truncation:
+	11. Use double for the calculation if fractional units are accepted.
+	12. Alternatively, define an explicit rounding policy such as ceiling or nearest whole unit.
+	13. Centralize total and surcharge calculations:
+	14. Calculate the surcharge once.
+	15. Pass that result into printBill and the total calculation where appropriate.
+	16. Use integer cents or BigDecimal for currency:
+	17. Do not use binary floating-point for rupee or paise calculations.
+	18. Define invalid-result behavior consistently:
+	19. Reject negative units before calling any calculation method.
+	20. Return -1.0 only as explicitly required, and prevent downstream billing.
+
+Optional
+
+	•  Validate empty consumer number/name.
+	•  Set a readable locale for decimal output.
+	•  Extract validation and formatting into separate methods.
+	•  Add JUnit coverage for 0 units, 99, 101, 299, 301, 393, 394, negative readings, and decimal readings.
+	•  Add command-line or automated tests for invalid input.
+	•  Improve printBill so all values use a consistent rupee/decimal format.
+
+The relevant implementation is in ElectricityBillApplication.java.
+
+
+Review Decisions:
+
+Finding(s): 
+Validate both meter readings | Critial | Accepted | Don't want the whole program to crash on an error
+Rolled together with: 
+- No non-numeric inputs
+- No negative inputs
+- Reject NaN and infinity
+- Friendly error instead of stack trace
+- Safe input handling
+- Catch input mismatch exception
+- Retry or exit cleanly
+- Reject current reading lower than previous reading.
+- Define invalid-result behavior consistently
+To handle these, instead implement an input loop: Instead of simply returning on an invalid input, the program should reprompt rather than exiting.
+This allows the program to handle mistaken inputs.
+
+Remove silent decimal truncation from unit calculation | Critical | Accepted | Want the program to accept partial units as well, not just whole ints.
+Rolled together with:
+- Represent units as a double internally
+
+Centralize total and surcharge calculations | Critical | Accepted | Good for maintainability, code cleanliness
+- Calculate the surcharge only once
+- Pass that result into printBill and the total application when appropriate.
+
+Do not use binary floating-point for rupee or paise calculations. | Critical | Rejected | Rounding can be handled by the biller, this is only a test program with theoretical values.
+
+
+Prompt 7
+Act as an experienced java application developer.
+
+Improve upon the selected code. Suggest rewritten code that would make the following changes:
+- Calculate surcharge exactly once, by calling calculateSurcharge in the main method. Alter the signature of calculateTotal so that it accepts surcharge as an input.
+- Change the internal type of units to a double everywhere it appears in the program so that partial units are accepted
+- Alter the validation of inputs for meter readings: The inputs should be within loops that continue until a valid input is given for that field. Reject non-numerics, NaN, Infinity, negatives, and current readings which are lower than previous readings.
+
+Do not alter buisness rules, method signatures, or output formats that were not mentioned previously.
+Point out and explain each change you made.
+
+Output 7:
+package com.citypower.billing;
+
+import java.util.Scanner;
+
+public class ElectricityBillApplication {
+    public static final int FIRST_SLAB_LIMIT = 100;
+    public static final int SECOND_SLAB_LIMIT = 300;
+
+    public static final double FIRST_SLAB_RATE = 3.00;
+    public static final double SECOND_SLAB_RATE = 5.00;
+    public static final double THIRD_SLAB_RATE = 7.50;
+
+    public static final double FIXED_MONTHLY_CHARGE = 50.00;
+    public static final double SURCHARGE_LIMIT = 2000.00;
+    public static final double SURCHARGE_RATE = 0.05;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter consumer number: ");
+        String consumerNumber = scanner.nextLine();
+
+        System.out.print("Enter consumer name: ");
+        String consumerName = scanner.nextLine();
+
+        double previousReading = readMeterReading(
+                scanner,
+                "Enter previous meter reading: ",
+                null);
+
+        double currentReading = readMeterReading(
+                scanner,
+                "Enter current meter reading: ",
+                previousReading);
+
+        double unitsConsumed = currentReading - previousReading;
+        double units = unitsConsumed;
+
+        double energyCharge = calculateEnergyCharge(units);
+        double surcharge = calculateSurcharge(energyCharge);
+        double totalAmount = calculateTotal(energyCharge, surcharge);
+
+        printBill(consumerNumber, consumerName, unitsConsumed,
+                energyCharge, surcharge, totalAmount);
+
+        scanner.close();
+    }
+
+    private static double readMeterReading(Scanner scanner,
+                                           String prompt,
+                                           Double previousReading) {
+        while (true) {
+            System.out.print(prompt);
+
+            if (!scanner.hasNextDouble()) {
+                System.out.println("Error: Please enter a valid number.");
+                scanner.nextLine();
+                continue;
+            }
+
+            double reading = scanner.nextDouble();
+            scanner.nextLine();
+
+            if (Double.isNaN(reading) || Double.isInfinite(reading)
+                    || reading < 0) {
+                System.out.println("Error: Meter reading must be a finite "
+                        + "non-negative number.");
+                continue;
+            }
+
+            if (previousReading != null
+                    && reading < previousReading) {
+                System.out.println("Error: Current meter reading cannot be less "
+                        + "than the previous meter reading.");
+                continue;
+            }
+
+            return reading;
+        }
+    }
+
+    public static double calculateEnergyCharge(double units) {
+        if (units < 0) { // Error condition for testing
+            return -1.0;
+        }
+
+        double energyCharge = 0.0;
+
+        if (units <= FIRST_SLAB_LIMIT) {
+            energyCharge = units * FIRST_SLAB_RATE;
+        } else if (units <= SECOND_SLAB_LIMIT) {
+            energyCharge = (FIRST_SLAB_LIMIT * FIRST_SLAB_RATE)
+                    + ((units - FIRST_SLAB_LIMIT) * SECOND_SLAB_RATE);
+        } else {
+            energyCharge = (FIRST_SLAB_LIMIT * FIRST_SLAB_RATE)
+                    + ((SECOND_SLAB_LIMIT - FIRST_SLAB_LIMIT)
+                            * SECOND_SLAB_RATE)
+                    + ((units - SECOND_SLAB_LIMIT) * THIRD_SLAB_RATE);
+        }
+
+        return energyCharge;
+    }
+
+    public static double calculateSurcharge(double energyCharge) {
+        if (energyCharge > SURCHARGE_LIMIT) {
+            return energyCharge * SURCHARGE_RATE;
+        }
+
+        return 0.0;
+    }
+
+    public static double calculateTotal(double energyCharge, double surcharge) {
+        return energyCharge + FIXED_MONTHLY_CHARGE + surcharge;
+    }
+
+    public static void printBill(String consumerNumber,
+                                 String consumerName,
+                                 double unitsConsumed,
+                                 double energyCharge,
+                                 double surcharge,
+                                 double totalAmount) {
+        System.out.println("\n--- CityPower Electricity Bill ---");
+        System.out.println("Consumer Number: " + consumerNumber);
+        System.out.println("Consumer Name: " + consumerName);
+        System.out.printf("Units Consumed: %.2f%n", unitsConsumed);
+        System.out.printf("Energy Charge: Rs. %.2f%n", energyCharge);
+        System.out.printf("Fixed Monthly Charge: Rs. %.2f%n",
+                FIXED_MONTHLY_CHARGE);
+        System.out.printf("Surcharge: Rs. %.2f%n", surcharge);
+        System.out.printf("Total Amount: Rs. %.2f%n", totalAmount);
+    }
+}
+	•  Surcharge calculated once: main now calls calculateSurcharge(energyCharge) once. calculateTotal receives that value as a second parameter instead of calling calculateSurcharge itself.
+	•  Partial units supported: calculateEnergyCharge now accepts double units, and main no longer casts unitsConsumed to int.
+	•  Meter-reading validation: A private readMeterReading loop:
+	•  Rejects non-numeric input.
+	•  Rejects NaN and infinite values.
+	•  Rejects negative readings.
+	•  Rejects a current reading lower than the validated previous reading.
+	•  Repeats the prompt until a valid value is entered.
+	•  Business rules and output: Existing slab limits/rates, fixed charge, surcharge threshold/rate, and bill formatting remain unchanged.
+	•  Method-signature caveat: The requested change necessarily modifies calculateEnergyCharge from int to double and calculateTotal to accept surcharge. These were explicitly requested; the remaining public method signatures remain unchanged.
+
+The calculateEnergyCharge method still rejects negative units, but the meter-reading validation prevents negative consumed units from reaching it.

@@ -5,7 +5,7 @@ public class Transaction {
 	
 	private int transactionID;
 	private int accountNumber;
-	private String transactionType;
+	private TransactionType transactionType;
 	private double amount;
 	// Records the two participants in the transaction.
 	private String transactionRef;
@@ -27,13 +27,13 @@ public class Transaction {
 
 
 
-	public String getTransactionType() {
+	public TransactionType getTransactionType() {
 		return transactionType;
 	}
 
 
 
-	public void setTransactionType(String transactionType) {
+	public void setTransactionType(TransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
 
@@ -73,7 +73,7 @@ public class Transaction {
 		this.transactionDate = transactionDate;
 	}
 	
-	Transaction(int transactionID, int accountNumber, String transactionType, double amount, String transactionRef, LocalDate transactionDate){
+	Transaction(int transactionID, int accountNumber, TransactionType transactionType, double amount, String transactionRef, LocalDate transactionDate){
 		this.transactionID = transactionID;
 		this.accountNumber = accountNumber;
 		this.transactionType = transactionType;

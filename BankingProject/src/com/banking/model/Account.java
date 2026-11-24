@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public abstract class Account {
 	
-	private int accountNumber;
-	private int customerID;
-	private String accountType;
-	private double accountBalance;
-	private LocalDate dateCreated;
+	protected int accountNumber;
+	protected int customerID;
+	protected AccountType accountType;
+	protected double accountBalance;
+	protected LocalDate dateCreated;
 	
 	public int getAccountNumber(){
 		return accountNumber;
@@ -26,13 +26,13 @@ public abstract class Account {
 
 
 
-	public String getAccountType() {
+	public AccountType getAccountType() {
 		return accountType;
 	}
 
 
 
-	public void setAccountType(String accountType) {
+	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
 
@@ -60,12 +60,20 @@ public abstract class Account {
 		this.dateCreated = dateCreated;
 	}
 	
-	Account(int accountNumber, int customerID, String accountType, double accountBalance, LocalDate dateCreated){
+	Account(int accountNumber, int customerID, AccountType accountType, double accountBalance, LocalDate dateCreated){
 		this.accountNumber = accountNumber;
 		this.customerID = customerID;
 		this.accountType = accountType;
 		this.accountBalance = accountBalance;
 		this.dateCreated = dateCreated;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Account [accountNumber=" + accountNumber + ", customerID=" + customerID + ", accountType=" + accountType
+				+ ", accountBalance=" + accountBalance + ", dateCreated=" + dateCreated + "]";
 	}
 
 	public static void main(String[] args) {
